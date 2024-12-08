@@ -23,10 +23,53 @@ export function part1(input: string): number {
       for (const [dx, dy] of directions) {
         if (checkXMAS(grid, row, col, dx, dy)) {
           count++;
-          console.log(`Found X at (${row},${col}) with dx=${dx} and dy=${dy}`);
+          const word = ["X", "M", "A", "S"]
+            .map((_, i) => grid[row + dx * i][col + dy * i])
+            .join("");
+          console.log(
+            `Found ${word} starting at (${row},${col}) going direction (${dx},${dy})`
+          );
         }
       }
     }
   }
   return count;
+}
+
+function checkXMAS(
+  grid: string[][],
+  startRow: number,
+  startCol: number,
+  dx: number,
+  dy: number
+): boolean {
+  const word = "XMAS";
+
+  // check if the word would go out of bounds
+  for (let i = 0; i < word.length; i++) {
+    const row = startRow + dx * i;
+    const col = startCol + dy * i;
+
+    if (row < 0 || row >= grid.length || col < 0 || col >= grid[0].length) {
+      return false;
+    }
+  }
+
+  // check if the letters match
+  for (let i = 0; i < word.length; i++) {
+    const row = startRow + dx * i;
+    const col = startCol + dy * i;
+    if (grid[row][col] !== word[i]) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+if (require.main === module) {
+  const example = readInput(4);
+  console.log("Example grid:");
+  console.log(example);
+  console.log("\nPart 1 result:", part1(example));
 }
