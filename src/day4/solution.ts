@@ -67,6 +67,10 @@ function checkXMAS(
   return true;
 }
 
+export function part2(input: string): number {
+  return 0;
+}
+
 if (require.main === module) {
   const example = readInput(4);
   console.log("Example grid:");
