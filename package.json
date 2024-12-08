@@ -4,7 +4,8 @@
     "test:watch": "jest --watch",
     "build": "tsc",
     "start": "ts-node",
-    "day1": "ts-node src/day1/solution.ts"
+    "day1": "ts-node src/day1/solution.ts",
+    "day2": "ts-node src/day2/solution.ts"
   },
   "name": "2024",
   "version": "1.0.0",
