@@ -1,10 +1,16 @@
 import { readInput } from "../utils/readInput";
 
-const input = readInput(1, "example.txt");
+const input = readInput(1);
 
 export function part1(input: string): number {
   const [list1, list2] = parseInput(input);
-  return 0;
+
+  list1.sort((a, b) => a - b);
+  list2.sort((a, b) => a - b);
+
+  const differences = list1.map((item, index) => Math.abs(item - list2[index]));
+
+  return differences.reduce((acc, cur) => acc + cur, 0);
 }
 
 export function part2(input: string): number {
@@ -27,7 +33,7 @@ function parseInput(input: string): [number[], number[]] {
 }
 
 if (require.main === module) {
-  const example = readInput(1, "example.txt");
+  const example = readInput(1);
   const [list1, list2] = parseInput(example);
 
   console.log("Example lists:");
