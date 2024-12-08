@@ -23,11 +23,18 @@ export function part2(input: string): number {
   });
 
   // lets test our frequency counting
-  console.log("Frequences:", frequencies);
-  frequencies.forEach((count, num) => {
-    console.log(`${num} appears ${count} times`);
-  });
-  return 0;
+  const similarityScore = list1.reduce((total, num) => {
+    const frequency = frequencies.get(num) || 0;
+    const score = num * frequency;
+
+    console.log(
+      `${num} appears ${frequency} times: ${num} * ${frequency} = ${score}`
+    );
+
+    return total + score;
+  }, 0);
+
+  return similarityScore;
 }
 
 function parseInput(input: string): [number[], number[]] {
@@ -45,6 +52,6 @@ function parseInput(input: string): [number[], number[]] {
 }
 
 if (require.main === module) {
-  const example = readInput(1, "example.txt");
+  const example = readInput(1);
   console.log("\nPart 2 result:", part2(example));
 }
