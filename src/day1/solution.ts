@@ -14,7 +14,19 @@ export function part1(input: string): number {
 }
 
 export function part2(input: string): number {
-  // Your solution for part 2
+  const [list1, list2] = parseInput(input);
+  const frequencies = new Map<number, number>();
+
+  // count frequencies in list2
+  list2.forEach((num) => {
+    frequencies.set(num, (frequencies.get(num) || 0) + 1);
+  });
+
+  // lets test our frequency counting
+  console.log("Frequences:", frequencies);
+  frequencies.forEach((count, num) => {
+    console.log(`${num} appears ${count} times`);
+  });
   return 0;
 }
 
@@ -33,12 +45,6 @@ function parseInput(input: string): [number[], number[]] {
 }
 
 if (require.main === module) {
-  const example = readInput(1);
-  const [list1, list2] = parseInput(example);
-
-  console.log("Example lists:");
-  console.log("List 1:", list1); // Should show [3, 4, 2, 1, 3, 3]
-  console.log("List 2:", list2); // Should show [4, 3, 5, 3, 9, 3]
-
-  console.log("\nPart 1 result:", part1(example));
+  const example = readInput(1, "example.txt");
+  console.log("\nPart 2 result:", part2(example));
 }
